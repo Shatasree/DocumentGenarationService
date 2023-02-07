@@ -6,21 +6,36 @@ namespace Document_Genaration.Model
     {
         public string TemplateId { get; set; }
         public string TemplateName { get; set; }
-        public  string TemplateType{get; set;}
+        public string TemplateType { get; set; }
         public string TemplatePath { get; set; }
         public string BodyPlaceholder { get; set; }
         public string AllValueStore { get; set; }
-       
-       
- 
         public bool IsWatermark { get; set; }
-        
+
         public string WatermarkImage { get; set; }
         public string Watermarktext { get; set; }
-       public float WatermarkOpacity { get; set; }
+        public float WatermarkOpacity { get; set; }
         public bool IsPassword { get; set; }
         public string Password { get; set; }
 
-       
+
     }
-}
+
+
+    }
+    public class MailResponse
+    {
+
+
+        public string StatusCode { get; set; }
+        public string Status { get; set; }              //API Return
+        public string Message { get; set; }
+
+
+    }
+
+
+
+ 
+
+

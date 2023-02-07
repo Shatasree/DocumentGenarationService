@@ -6,6 +6,6 @@ namespace Document_Genaration.DAL
     public interface IInterface
     {
        // string DbConnection();
-        public DataSet insert(UserTemplate template);
+        public string insert(UserTemplate template);
     }
 }

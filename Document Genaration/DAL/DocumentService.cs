@@ -62,17 +62,40 @@ public class DocumentService : Irepo
         pdf.SecuritySettings.AllowUserCopyPasteContent = false;
         pdf.SecuritySettings.AllowUserPrinting =
         IronPdf.Security.PdfPrintSecurity.FullPrintRights;
-        pdf.SecuritySettings.OwnerPassword = "abc";
+        pdf.SecuritySettings.OwnerPassword = "MNO";
         pdf.SecuritySettings.UserPassword = "xyz";
-        pdf.SaveAs("D:\\Document Genaration\\Document Genaration\\pro\\practice3.pdf");
+        pdf.SaveAs("D:\\Document Genaration\\Document Genaration\\pro\\practice15.pdf");
 
-        return "0";
+       // return "0";
+        if(pdf!=null)
+        {           MailResponse mailResponse = new MailResponse();
+                    mailResponse.Status = "True";
+                    mailResponse.StatusCode = "200";
+                    mailResponse.Message = "notification sent";
+                    string strjson = JsonSerializer.Serialize<MailResponse>(mailResponse);//to change the dot net object to  JSon object
+
+                    return strjson;
+
+
+                }
+                else
+                {
+                    MailResponse mailResponse = new MailResponse();
+                    mailResponse.StatusCode = "400";
+                    mailResponse.Status = "false";
+                    mailResponse.Message = "Mail not Sent";
+                    string strjson = JsonSerializer.Serialize<MailResponse>(mailResponse);
+                    return strjson.ToString();
+
+
+                }
+            }
 
 
     }
    
 
-}
+
 
 
 

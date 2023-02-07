@@ -1,0 +1,72 @@
+﻿@{ ViewBag.Title = "User Details jjj"; }
+<table class="table">
+    <thead>
+        <tr>
+            <th>User Name</th>
+            <th>Phone Number</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+<br />
+<div class="form-group">
+    <input type="button" id="btnAddNew" class="btn btn-primary" value="Add New" onclick="window.location.href='/User/Index'" />
+</div>
+
+@if (TempData["SuccessMessage"] != null && TempData["SuccessMessage"] == "Successfully Updated")
+{
+    <script>
+        swal("Good job!", "Data has been successfully Updated!", "success");
+    </script>
+}
+@if (TempData["SuccessMessage"] != null && TempData["SuccessMessage"] == "Successfully Inserted")
+{
+    <script>
+        swal("Good job!", "Data has been successfully Inserted!", "success");
+    </script>
+}
+@if (TempData["SuccessMessage"] != null && TempData["SuccessMessage"] == "Successfully Removed")
+{
+    <script>
+        swal("Good job!", "Data has been successfully Removed!", "success");
+    </script>
+}
+<script>
+    $(document).ready(function () {
+        Get_Data();
+    });
+    function Get_Data() {
+        $.ajax({
+            type: 'GET',
+            url: '/Home/Get_Data',
+            //cache: false,
+            success: function (data) {
+                var tr = '';
+                for (var i = 0; i < data.length; i++) {
+                    console.log(data[i].phone);
+                    tr += '<tr><td>' + data[i].userName + '</td><td>' + data[i].phone + '</dt><td><a href="/User/GetUser?Id=' + data[i].Id + '">Update</a>&nbsp;<a href="#" onclick="Data_Remove(' + data[i].Id + ')">Remove</a></td></tr>';
+                }
+                $("tbody").append(tr);
+            }
+        });
+    }
+    function Data_Remove(id) {
+        swal({
+            title: "Are you sure?",
+            text: "You want to remove this record?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    window.location.href = "/Home/Remove_data?Id=" + id + "";
+                    swal("Record has been deleted!", {
+                        icon: "success",
+                    });
+                }
+            });
+    }
+</script>
